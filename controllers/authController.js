@@ -8,8 +8,14 @@ exports.register = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.create({ email, password });
+    if (!user) {
+      return res.status(504).json({ error: 'Error creating user' });
+    }
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+      expiresIn: '12h'
+    });
     console.log('Registration successful');
-    res.status(201).json(user);
+    res.status(201).json({ user, token });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
