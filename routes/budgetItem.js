@@ -33,13 +33,19 @@ router.put('/:id',
 	validate,
 	budgetItemController.updateBudgetItem);
 
-// Delete a budget
+// Delete a budget item
 router.delete('/:itemId', [param('itemId').notEmpty().withMessage('Budget item ID must be an integer')], validate, budgetItemController.deleteBudgetItem);
 
-// List all budgets
+// List all budget items
 router.get('/', 
 	auth,
 	budgetItemController.getAllBudgetItems
+);
+
+// List all budget items for a specific budget
+router.get('/:budgetId', 
+	auth,
+	budgetItemController.getAllBudgetItemsForBudget
 );
 
 module.exports = router;

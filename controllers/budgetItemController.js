@@ -58,4 +58,15 @@ exports.getAllBudgetItems = async (req, res) => {
 	}
 };
 
+// List all budget items for a particular budget
+exports.getAllBudgetItemsForBudget = async (req, res) => {
+	try {
+	  const { budgetId } = req.params;
+	  const budgetItems = await BudgetItem.findAll({ where: { budgetId } });
+	  res.json(budgetItems);
+	} catch (error) {
+	  res.status(500).json({ error: error.message });
+	}
+};
+
 // should add one to list all budget items for a particular budget and maybe even all for a particular user
