@@ -34,12 +34,7 @@ router.put('/:budgetId',
 );
 
 // Delete a budget
-router.delete('/delete',
-	[
-		body('budgetId').notEmpty().withMessage('Budget ID is require')
-	],
-	validate, budgetController.deleteBudget
-);
+router.delete('/:budgetId', [param('budgetId').isInt().withMessage('Budget ID must be an integer')], validate, budgetController.deleteBudget);
 
 // List all budgets
 router.get('/', 

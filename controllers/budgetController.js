@@ -35,7 +35,7 @@ exports.updateBudget = async (req, res) => {
 // Delete a budget
 exports.deleteBudget = async (req, res) => {
   try {
-    const { budgetId } = req.body;
+    const { budgetId } = req.params;
     const budget = await Budget.findByPk(budgetId);
     if (!budget) {
       return res.status(404).json({ error: 'Budget not found' });
