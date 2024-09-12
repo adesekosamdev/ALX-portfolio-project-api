@@ -7,7 +7,7 @@ exports.createBudget = async (req, res) => {
     const budgetId = "";
     const { userId, name, totalAmount, description } = req.body;
     const budget = await Budget.create({ budgetId, userId, name, totalAmount, description });
-    res.status(201).json(budget);
+    res.status(200).json(budget);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -41,7 +41,7 @@ exports.deleteBudget = async (req, res) => {
       return res.status(404).json({ error: 'Budget not found' });
     }
     await budget.destroy();
-    res.status(204).json();
+    res.status(200).json();
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
